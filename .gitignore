@@ -1,5 +1,6 @@
 .DS_Store
 vendor
+bin
 Thumbs.db
 config.php
 phinx.yml
