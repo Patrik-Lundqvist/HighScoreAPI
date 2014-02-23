@@ -4,3 +4,4 @@ bin
 Thumbs.db
 config.php
 phinx.yml
+composer.lock
