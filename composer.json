@@ -3,9 +3,12 @@
     "require": {
     	"php": ">=5.3.1",
         "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "twig/twig": "1.*",
         "entomb/slim-json-api": "dev-master",
         "illuminate/database": "*",
-        "robmorgan/phinx": "*"
+        "robmorgan/phinx": "*",
+        "jeremykendall/slim-auth": "dev-master"
     },
 
 	"config": {

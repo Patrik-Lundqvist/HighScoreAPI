@@ -1,0 +1,108 @@
+{% extends "adminpanel.html" %}
+
+{% block contentArea %}
+<div class="row">
+  <div class="large-12 columns">
+    <h2>Games.</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    {% if flash.info is not null %}
+        <div data-alert class="alert-box"> {{flash.info}} </div>
+    {% endif %}
+    <table width="100%"> 
+      <thead>
+       <tr>
+        <th>Name</th>
+        <th>Key</th>
+        <th>Secret</th> 
+        <th>Latest version</th>
+        <th>Required version</th> 
+        <th>Action</th>
+      </tr> 
+    </thead> 
+
+      <tbody>
+
+        {% for game in games %}
+          <tr> 
+            <td>{{ game.name|e }}</td>
+            <td>{{ game.key|e }}</td>
+            <td>{{ game.secret|e }}</td>
+            <td>{{ game.version_latest|e }}</td>
+            <td>{{ game.version_required|e }}</td>
+            <td><a class="tiny button dropdown" data-dropdown="drop-{{ game.id }}" href="#">Manage</a></td>
+            <ul id="drop-{{ game.id }}" data-dropdown-content class="f-dropdown">
+              <li><a href="/admin/game/{{ game.id }}"><i class="fi-eye"></i> View</a></li>
+              <li><a href="/admin/game/{{ game.id }}/edit"><i class="fi-pencil"></i> Edit</a></li>
+              <li><a class="confirmButton" data-message="delete the game" href="/admin/game/{{ game.id }}/delete"><i class="fi-trash"></i> Delete</a></li>
+              <li><a class="confirmButton" data-message="generate a new key" href="/admin/game/{{ game.id }}/newkey"><i class="fi-key"></i> Generate key</a></li>
+              <li><a class="confirmButton" data-message="generate a new secret" href="/admin/game/{{ game.id }}/newsecret"><i class="fi-lock"></i> Generate secret</a></li>
+            </ul>
+          </tr> 
+        {% endfor %}
+
+      </tbody> 
+
+    </table>
+  </div>
+</div>
+<div id="confirmModal" class="reveal-modal small" data-reveal>
+    <h4>Are you sure you want to <span id="confirmText"></span>?</h4>
+  <a id="confirmOk" class="button small alert" href="setMe">Yes</a> / 
+  <a id="confirmCancel" class="button small" href="#">No</a>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<form method="post">
+  <div class="row">
+    {% if flash.error is not null %}
+      <div data-alert class="alert-box alert"> {{flash.error}} </div>
+    {% endif %}
+    <fieldset> 
+      <legend>Add Game.</legend> 
+      <div class="large-3 columns">
+        <label>Name
+          <input type="text" placeholder="Name" name="name"/>
+        </label>
+      </div>
+      <div class="large-3 columns">
+        <label>Latest version <span data-tooltip class="has-tip" title="Format example: 0.1.2.3"><i class="fi-info"></i></span>
+          <input type="text" placeholder="Latest version" name="latest_version" />
+        </label>
+      </div>
+      <div class="large-3 columns">
+        <label>Required version <span data-tooltip class="has-tip" title="Format example: 0.1.2.0"><i class="fi-info"></i></span>
+          <input type="text" placeholder="Required version" name="required_version" />
+        </label>
+      </div>
+      <div class="large-3 columns">
+        <input type="submit" class="button expand success button-new-game" value="Add">
+      </div>
+    </fieldset>
+  </div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+ $(document).ready(function() {
+  
+    $("#confirmCancel").click(function(event) {
+      event.preventDefault();
+      $('#confirmModal').foundation('reveal', 'close');
+    });
+
+    $(".confirmButton").click(function(event) {
+      event.preventDefault();
+      $("#confirmText").text($(this).data('message'));
+      $("#confirmOk").attr('href',$(this).attr('href'));
+      $('#confirmModal').foundation('reveal', 'open');
+    });
+
+  });
+
+</script>
+{% endblock %}

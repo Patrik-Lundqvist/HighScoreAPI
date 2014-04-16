@@ -1,0 +1,58 @@
+{% extends "adminpanel.html" %}
+
+{% block contentArea %}
+<div class="row">
+  <div class="large-12 columns">
+    <h2>{{game.name}}.</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+  	<table width="100%"> 
+      <tbody>
+      	<tr>
+      		<td>ID.</td>
+      		<td>{{game.id}}</td>
+      	</tr>
+      	<tr>
+      		<td>Key.</td>
+      		<td>{{game.key}}</td>
+      	</tr>
+      	<tr>
+      		<td>Secret.</td>
+      		<td>{{game.secret}}</td>
+      	</tr>
+      	<tr>
+      		<td>Latest version.</td>
+      		<td>{{game.version_latest}}</td>
+      	</tr>
+      	<tr>
+      		<td>Requiered version.</td>
+      		<td>{{game.version_required}}</td>
+      	</tr>
+        <tr>
+          <td>Number of scores.</td>
+          <td>{{scoreCount}}</td>
+        </tr>
+        <tr>
+          <td>Highscore.</td>
+          {% if scoreTop is not null %}
+            <td>{{scoreTop}}</td>
+          {% else %}
+            <td>No scores yet</td>
+          {% endif %}
+        </tr>
+      	<tr>
+      		<td>Created at.</td>
+      		<td>{{game.created_at}}</td>
+      	</tr>
+      	<tr>
+      		<td>Updated at.</td>
+      		<td>{{game.updated_at}}</td>
+      	</tr>
+      </tbody> 
+
+    </table>
+  </div>
+</div>
+{% endblock %}

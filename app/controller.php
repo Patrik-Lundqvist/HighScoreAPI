@@ -24,11 +24,12 @@ abstract class Controller extends Application
         return $this->app->request()->post($value);
     }
 
-    public function response($body)
+    public function response($status,$body)
     {
         $response = $this->app->response();
         $response['Content-Type'] = 'application/json';
-        $response->body(json_encode(array($body)));
+        $response->body(json_encode($body));
+        $response->status($status);
     }
 
 }

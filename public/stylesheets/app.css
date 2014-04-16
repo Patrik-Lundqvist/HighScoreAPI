@@ -1,0 +1,9 @@
+button, .button {
+    margin: 0;
+}
+
+button, .button-new-game {
+    margin-top: 21px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

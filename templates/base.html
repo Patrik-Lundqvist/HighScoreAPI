@@ -1,0 +1,26 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HighscoreAPI</title>
+    <link rel="stylesheet" href="/stylesheets/foundation.min.css" />
+    <link rel="stylesheet" href="/stylesheets/foundation-icons.css" />
+    <link rel="stylesheet" href="/stylesheets/app.css" />
+    <script src="/javascripts/vendor/modernizr.js"></script>
+  </head>
+  <body>
+  
+  {% block content %}{% endblock %} 
+	
+    <script src="/javascripts/vendor/jquery.js"></script>
+    <script src="/javascripts/foundation.min.js"></script>
+    <script src="/javascripts/foundation/foundation.dropdown.js"></script>
+    <script src="/javascripts/foundation/foundation.tooltip.js"></script>
+    <script src="/javascripts/foundation/foundation.reveal.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    {% block scripts %}{% endblock %} 
+  </body>
+</html>
