@@ -1,5 +1,5 @@
 .DS_Store
-vendor
+/vendor
 bin
 Thumbs.db
 phinx.yml
