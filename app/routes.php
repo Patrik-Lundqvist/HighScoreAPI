@@ -6,7 +6,7 @@
 
 // Front-page "/"
 $app->get('/', function () use ($app) {
-	$app->AdminController->index();
+	$app->render('index.html');
 });
 
 // POST new highscore "/highscore/new"
