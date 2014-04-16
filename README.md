@@ -1,4 +1,4 @@
-HighscoreAPI
+HighScoreAPI.
 ===================
 This is a server written in PHP to keep track of game high scores and version checks.
 
