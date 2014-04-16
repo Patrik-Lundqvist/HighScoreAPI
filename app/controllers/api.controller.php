@@ -7,16 +7,16 @@ class APIController extends Controller {
 	///
 	// Constructor
 	///
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-        // Get the public key
-   		$publickey = $this->app->request()->get('key');
+		// Get the public key
+		$publickey = $this->app->request()->get('key');
 
-        // Get the game from db
-        $this->game = Game::where('key', $publickey)->first();
-    }
+		// Get the game from db
+		$this->game = Game::where('key', $publickey)->first();
+	}
 
 	///
 	// Default page
@@ -51,9 +51,7 @@ class APIController extends Controller {
 		$highscores = $highscores->toArray();
 
 		// Prepare the highscore array for json encoding
-		$response = array(
-					   'scores' => $highscores
-					   );
+		$response = array('scores' => $highscores);
 
 		$this->response(200,$response);
 	}
@@ -87,33 +85,33 @@ class APIController extends Controller {
 		}
 
 
-        if(empty($newHighscore->username)){
-	       // Not Acceptable
+		if(empty($newHighscore->username)){
+		   // Not Acceptable
 			$this->app->halt(406,"Name is required");
-	    }
+		}
 
-	    if(strlen($newHighscore->username) > 20)
-        {
-        	// Not Acceptable
+		if(strlen($newHighscore->username) > 20)
+		{
+			// Not Acceptable
 			$this->app->halt(406,"Name is too long");
-        }
+		}
 
-    	if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $newHighscore->username) )
-    	{
-    		// Not Acceptable
+		if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $newHighscore->username) )
+		{
+			// Not Acceptable
 			$this->app->halt(406,"Name can only contain letters and numbers");
-    	}
+		}
 
-        if(empty($newHighscore->score)){
-	       // Not Acceptable
+		if(empty($newHighscore->score)){
+		   // Not Acceptable
 			$this->app->halt(406,"Score is required");
-	    }
+		}
 
-    	if (!preg_match('/^(\d+)(\.\d+)?$/', $newHighscore->score) )
-    	{
-    		// Not Acceptable
+		if (!preg_match('/^(\d+)(\.\d+)?$/', $newHighscore->score) )
+		{
+			// Not Acceptable
 			$this->app->halt(406,"Score must be a positive decimal");
-    	}
+		}
 
 
 
@@ -165,18 +163,18 @@ class APIController extends Controller {
 
 		$this->response(200,$response);
 	}
-    private function Clamp($int, $min, $max)
-    {
+	private function Clamp($int, $min, $max)
+	{
 
-        if($int < $min)
-                $int = $min;
-        if($int > $max)
-                $int = $max;
-        return $int;
+		if($int < $min)
+				$int = $min;
+		if($int > $max)
+				$int = $max;
+		return $int;
 
-    }
-    private function validateVersionFormat($version)
-    {
-    	return preg_match('/^(\d+)(\.\d+)?(\.\d+)?(\.\d+)?$/', $version);
-    }
+	}
+	private function validateVersionFormat($version)
+	{
+		return preg_match('/^(\d+)(\.\d+)?(\.\d+)?(\.\d+)?$/', $version);
+	}
 }

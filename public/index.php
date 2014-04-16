@@ -32,21 +32,21 @@ use JeremyKendall\Slim\Auth\Adapter\Db\PdoAdapter;
 use JeremyKendall\Slim\Auth\Bootstrap;
 
 $app = new \Slim\Slim(array(
-    'debug' => true,
-    'view' => new \Slim\Views\Twig(),
-    'templates.path' => '../templates/',
-    'cookies.encrypt' => true,
-    'cookies.secret_key' => $cookieSecret
+	'debug' => true,
+	'view' => new \Slim\Views\Twig(),
+	'templates.path' => '../templates/',
+	'cookies.encrypt' => true,
+	'cookies.secret_key' => $cookieSecret
 ));
 
 // Slim Auth PDO instace
 $db = new PDO("{$databseSettings['driver']}:host={$databseSettings['host']};dbname={$databseSettings['database']}",$databseSettings['username'],$databseSettings['password']);
 $adapter = new PdoAdapter(
-    $db, 
-    "users", 
-    "username", 
-    "password", 
-    new PasswordValidator()
+	$db, 
+	"users", 
+	"username", 
+	"password", 
+	new PasswordValidator()
 );
 
 $acl = new Acl();

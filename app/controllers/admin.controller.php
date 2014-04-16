@@ -5,11 +5,11 @@ class AdminController extends Controller {
 	///
 	// Constructor
 	///
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-    }
+	}
 
 	///
 	// Default page
@@ -52,24 +52,24 @@ class AdminController extends Controller {
 		$errors += $this->validateVersionField($latestVersion);
 		$errors += $this->validateVersionField($requiredVersion);
 
-    	if(!empty($errors))
-        {
-        	$this->app->flash('error', $errors[0]);
-            $this->app->redirect('/admin/games');
-        }
+		if(!empty($errors))
+		{
+			$this->app->flash('error', $errors[0]);
+			$this->app->redirect('/admin/games');
+		}
 
 
-        $game = new Game();
+		$game = new Game();
 
-        $game->name = $name;
-        $game->version_latest = $latestVersion;
-        $game->version_required = $requiredVersion;
-        $game->secret = bin2hex(openssl_random_pseudo_bytes(16));
-        $game->key = bin2hex(openssl_random_pseudo_bytes(16));
+		$game->name = $name;
+		$game->version_latest = $latestVersion;
+		$game->version_required = $requiredVersion;
+		$game->secret = bin2hex(openssl_random_pseudo_bytes(16));
+		$game->key = bin2hex(openssl_random_pseudo_bytes(16));
 
-        $game->save();
+		$game->save();
 
-        $this->app->redirect('/admin/games');
+		$this->app->redirect('/admin/games');
 
 	}
 
@@ -147,12 +147,12 @@ class AdminController extends Controller {
 		$errors += $this->validateVersionField($editedGame->version_latest);
 		$errors += $this->validateVersionField($editedGame->version_required);
 
-    	if(!empty($errors))
-        {
-        	$this->app->flashNow('error', $errors[0]);
-        }
-        else
-        {
+		if(!empty($errors))
+		{
+			$this->app->flashNow('error', $errors[0]);
+		}
+		else
+		{
 			$this->app->flash('info', $game->name . " has been updated!");
 
 			// Set the new data
@@ -164,7 +164,7 @@ class AdminController extends Controller {
 			$game->save();
 
 			$this->app->redirect('/admin/games');
-        }
+		}
 
 		$data = array('game' => $editedGame);
 
@@ -293,65 +293,65 @@ class AdminController extends Controller {
 
 	private function login()
 	{
-        $username = $this->app->request->post('username');
-        $password = $this->app->request->post('password');
+		$username = $this->app->request->post('username');
+		$password = $this->app->request->post('password');
 
-        $result = $this->app->authenticator->authenticate($username, $password);
+		$result = $this->app->authenticator->authenticate($username, $password);
 
-        if ($result->isValid()) {
-            $this->app->redirect('/admin');
-        } else {
-            $messages = $result->getMessages();
-            $this->app->flash('error', $messages[0]);
-            $this->app->redirect('/login');
+		if ($result->isValid()) {
+			$this->app->redirect('/admin');
+		} else {
+			$messages = $result->getMessages();
+			$this->app->flash('error', $messages[0]);
+			$this->app->redirect('/login');
 
-        }
+		}
 	}
 
 	private function register()
 	{
 		$username = $this->app->request->post('username');
-        $password = $this->app->request->post('password');
-        $passwordRepeat = $this->app->request->post('passwordRepeat');
+		$password = $this->app->request->post('password');
+		$passwordRepeat = $this->app->request->post('passwordRepeat');
 
-        if(empty($password)){
-	        $errors[] = "Password is required.";
-	    }
+		if(empty($password)){
+			$errors[] = "Password is required.";
+		}
 
-	    if(strlen($password) > 30)
-        {
-        	$errors[] = "Password too long.";
-        }
+		if(strlen($password) > 30)
+		{
+			$errors[] = "Password too long.";
+		}
 
-        if(strlen($password) < 6)
-        {
-        	$errors[] = "Password must be at least 6 characters.";
-        }
+		if(strlen($password) < 6)
+		{
+			$errors[] = "Password must be at least 6 characters.";
+		}
 
-        if($password != $passwordRepeat)
-        {
-        	$errors[] = "Passwords doesn't match.";
-        }
+		if($password != $passwordRepeat)
+		{
+			$errors[] = "Passwords doesn't match.";
+		}
 
 		if(empty($username)){
-	        $errors[] = "Username is required.";
-	    }
+			$errors[] = "Username is required.";
+		}
 
-        if(strlen($username) > 20)
-        {
-        	$errors[] = "Username too long.";
-        }
+		if(strlen($username) > 20)
+		{
+			$errors[] = "Username too long.";
+		}
 
-    	if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $username) )
-    	{
-    		$errors[] = "Username can only contain letters and numbers.";
-    	}
+		if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $username) )
+		{
+			$errors[] = "Username can only contain letters and numbers.";
+		}
 
-        if(!empty($errors))
-        {
-        	$this->app->flash('error', $errors[0]);
-            $this->app->redirect('/login');
-        }
+		if(!empty($errors))
+		{
+			$this->app->flash('error', $errors[0]);
+			$this->app->redirect('/login');
+		}
 
 
 		$user = new User();
@@ -365,50 +365,50 @@ class AdminController extends Controller {
 		$this->login();
 	}
 
-    private function validateVersionFormat($version)
-    {
-    	return preg_match('/^(\d+)(\.\d+)?(\.\d+)?(\.\d+)?$/', $version);
-    }
+	private function validateVersionFormat($version)
+	{
+		return preg_match('/^(\d+)(\.\d+)?(\.\d+)?(\.\d+)?$/', $version);
+	}
 
-    private function validateNameField($name)
-    {
-    	$errors = array();
+	private function validateNameField($name)
+	{
+		$errors = array();
 
-        if(empty($name)){
-	        $errors[] = "Name is required.";
-	    }
+		if(empty($name)){
+			$errors[] = "Name is required.";
+		}
 
-	    if(strlen($name) > 20)
-        {
-        	$errors[] = "Name too long.";
-        }
+		if(strlen($name) > 20)
+		{
+			$errors[] = "Name too long.";
+		}
 
-    	if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $name) )
-    	{
-    		$errors[] = "Name can only contain letters and numbers.";
-    	}
+		if ( !preg_match('/^[A-Za-z][A-Za-z0-9]*$/', $name) )
+		{
+			$errors[] = "Name can only contain letters and numbers.";
+		}
 
-    	return $errors;
-    }
+		return $errors;
+	}
 
-    private function validateVersionField($version)
-    {
-    	$errors = array();
+	private function validateVersionField($version)
+	{
+		$errors = array();
 
-        if(empty($version)){
-	        $errors[] = "Version number is required.";
-	    }
+		if(empty($version)){
+			$errors[] = "Version number is required.";
+		}
 
-	    if(strlen($version) > 20)
-        {
-        	$errors[] = "Version number too long.";
-        }
+		if(strlen($version) > 20)
+		{
+			$errors[] = "Version number too long.";
+		}
 
-    	if (!$this->validateVersionFormat($version))
-    	{
-    		$errors[] = "Version number can only contain numbers and dots (max 3)";
-    	}
+		if (!$this->validateVersionFormat($version))
+		{
+			$errors[] = "Version number can only contain numbers and dots (max 3)";
+		}
 
-    	return $errors;
-    }
+		return $errors;
+	}
 }

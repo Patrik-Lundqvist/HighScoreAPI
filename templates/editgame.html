@@ -2,37 +2,37 @@
 
 {% block contentArea %}
 <div class="row">
-  <div class="large-12 columns">
-    <h2>Edit game.</h2>
-  </div>
+	<div class="large-12 columns">
+		<h2>Edit game.</h2>
+	</div>
 </div>
 <form method="post">
-  <div class="row">
-    {% if flash.error is not null %}
-      <div data-alert class="alert-box alert"> {{flash.error}} </div>
-    {% endif %}
-    <fieldset> 
-      <legend>Edit details.</legend> 
-      <div class="large-3 columns">
-        <label>Name
-          <input type="text" value="{{game.name}}" placeholder="Name" name="name"/>
-        </label>
-      </div>
-      <div class="large-3 columns">
-        <label>Latest version <span data-tooltip class="has-tip" title="Format example: 0.1.2.3"><i class="fi-info"></i></span>
-          <input type="text" value="{{game.version_latest}}" placeholder="Latest version" name="latest_version" />
-        </label>
-      </div>
-      <div class="large-3 columns">
-        <label>Required version <span data-tooltip class="has-tip" title="Format example: 0.1.2.0"><i class="fi-info"></i></span>
-          <input type="text" value="{{game.version_required}}" placeholder="Required version" name="required_version" />
-        </label>
-      </div>
-      <div class="large-3 columns">
-        <input type="submit" class="button expand success button-new-game" value="Save">
-      </div>
-    </fieldset>
-  </div>
+	<div class="row">
+		{% if flash.error is not null %}
+			<div data-alert class="alert-box alert"> {{flash.error}} </div>
+		{% endif %}
+		<fieldset> 
+			<legend>Edit details.</legend> 
+			<div class="large-3 columns">
+				<label>Name
+					<input type="text" value="{{game.name}}" placeholder="Name" name="name"/>
+				</label>
+			</div>
+			<div class="large-3 columns">
+				<label>Latest version <span data-tooltip class="has-tip" title="Format example: 0.1.2.3"><i class="fi-info"></i></span>
+					<input type="text" value="{{game.version_latest}}" placeholder="Latest version" name="latest_version" />
+				</label>
+			</div>
+			<div class="large-3 columns">
+				<label>Required version <span data-tooltip class="has-tip" title="Format example: 0.1.2.0"><i class="fi-info"></i></span>
+					<input type="text" value="{{game.version_required}}" placeholder="Required version" name="required_version" />
+				</label>
+			</div>
+			<div class="large-3 columns">
+				<input type="submit" class="button expand success button-new-game" value="Save">
+			</div>
+		</fieldset>
+	</div>
 </form>
 
 {% endblock %}
